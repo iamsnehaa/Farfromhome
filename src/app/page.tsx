@@ -1,113 +1,106 @@
 import Image from "next/image";
+import {  data } from "@/lib/data/data";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:size-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <div className="bg-gray-100 min-h-screen">
+      <div className="flex justify-center items-center mt-0 py-8">
+        <div className="bg-white max-w-2xl w-full h-64 p-6 rounded-lg shadow-lg border border-gray-200">
+          <h1 className="text-3xl font-bold text-gray-800 mb-4 text-center">
+            Far From Home
+          </h1>
+          <p className="text-green-700 mt-4 text-center">
+            Bringing farm to your doorsteps with fresh produce and quality service.
+          </p>
+        </div>
+      </div>
+      <div className="py-14 bg-gray-100">
+        <div className="flex justify-center items-center">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl px-4 mx-auto">
+            {data.map((product, index) => (
+              <div
+                key={index}
+                className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
+              >
+                <div className="h-40 w-full bg-gray-200 flex items-center justify-center rounded-md mb-4 overflow-hidden">
+                  <Image
+                    src={product.image}
+                    alt={product.name}
+                    width={160}
+                    height={160}
+                    className="object-cover w-full h-full"
+                  />
+                </div>
+                <h2 className="text-xl font-semibold text-gray-800">{product.name}</h2>
+                <p className="text-gray-600 mb-2">Price: {product.price}</p>
+                <p className="text-gray-600">{product.description}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 
-      <div className="relative z-[-1] flex place-items-center before:absolute before:h-[300px] before:w-full before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 sm:before:w-[480px] sm:after:w-[240px] before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
+      {/* About Section */}
+      <div className="py-14 bg-white mx-5">
+        <main className="container mx-auto px-4">
+          <section className="mb-10">
+            <h2 className="text-2xl font-bold mb-4">Our Mission</h2>
+            <p className="text-gray-600">
+              At Far From Home, our mission is to connect contractors and farmers across regions, fostering collaboration, growth, and sustainable development. We believe in empowering local communities by bridging the gap between agriculture and modern contracting services.
+            </p>
+          </section>
+
+          <section className="mb-10">
+            <h2 className="text-2xl font-bold mb-4">Our Story</h2>
+            <p className="text-gray-600">
+              Established in 2024, Far From Home was born out of a need to address the challenges faced by both farmers and contractors in finding reliable partnerships. We saw the potential for a platform that could bring these two groups together, and thus, our journey began.
+            </p>
+          </section>
+
+          <section className="mb-10">
+            <h2 className="text-2xl font-bold mb-4">What We Offer</h2>
+            <p className="text-gray-600">
+              Our platform provides a comprehensive solution for contractors and farmers to connect, collaborate, and succeed. Whether you&apos;re looking for skilled labor, equipment, or agricultural expertise, Far From Home is your go-to resource.
+            </p>
+          </section>
+
+          <section className="mb-10">
+            <h2 className="text-2xl font-bold mb-4">Why Choose Us?</h2>
+            <p className="text-gray-600">
+              We are committed to delivering a seamless and reliable experience. Our platform is built with the latest technologies, ensuring security, performance, and ease of use. We prioritize the needs of our users and continually improve our services based on their feedback.
+            </p>
+          </section>
+
+          <section className="mb-10">
+            <h2 className="text-2xl font-bold mb-4">Meet the Team</h2>
+            <p className="text-gray-600">
+              Far From Home is powered by a dedicated team of professionals with a passion for agriculture and technology. Our diverse backgrounds in farming, contracting, and software development allow us to create innovative solutions that truly make a difference.
+            </p>
+          </section>
+
+          <section className="mb-10">
+            <h2 className="text-2xl font-bold mb-4">Get in Touch</h2>
+            <p className="text-gray-600">
+              We&apos;d love to hear from you! Whether you have questions, feedback, or just want to say hello, feel free to reach out to us via our contact page or follow us on social media.
+            </p>
+          </section>
+        </main>
       </div>
 
-      <div className="mb-32 grid text-center lg:mb-0 lg:w-full lg:max-w-5xl lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Explore starter templates for Next.js.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-balance text-sm opacity-50">
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
+      {/* Contact Section */}
+      <div className="bg-gray-50 py-10">
+        <div className="container mx-auto px-4 text-center">
+          <h1 className="text-2xl font-bold mb-4">Contact Us</h1>
+          <p className="text-gray-600">Email: one@gmail.com</p>
+          <p className="text-gray-600">Phone number: 123456789</p>
+        </div>
       </div>
-    </main>
+
+      <footer className="bg-green-600 text-white py-6">
+        <div className="container mx-auto px-4 text-center">
+          <p>&copy; 2024 Far From Home. All rights reserved.</p>
+        </div>
+      </footer>
+    </div>
   );
 }
