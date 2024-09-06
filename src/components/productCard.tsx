@@ -11,7 +11,7 @@ export default function ProductCard(props: ProductCardProps) {
     const { name, price, image, description, onAddToCart } = props;
 
     return (
-        <div className="bg-white p-4 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 border border-green-300">
+        <div className="bg-white p-4 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300 border border-green-300">
             <div className="relative w-full h-40 bg-green-100 rounded-md overflow-hidden mb-4">
                 {/* Image Adjustments */}
                 <Image

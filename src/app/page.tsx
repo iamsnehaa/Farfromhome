@@ -28,7 +28,7 @@ export default function Home() {
             {data.map((product, index) => (
               <div
                 key={index}
-                className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 border border-green-200"
+                className="bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300 border border-green-200"
               >
                 <div className="h-40 w-full bg-green-100 flex items-center justify-center rounded-md mb-4 overflow-hidden">
                   <Image

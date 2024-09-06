@@ -55,58 +55,61 @@ export default function ProductPage() {
     const toggleProfileCard = () => setShowProfileCard(!showProfileCard);
 
     return (
-        <section className="min-h-screen w-screen px-4 md:px-14 mt-0 bg-green-50">
+        <div>
             {/* Buyer Info */}
-            <div
-                className="flex items-center justify-center mt-2 py-1 w-16 h-16 bg-green-500 rounded-full cursor-pointer"
-                onClick={toggleProfileCard}
-            >
-                <span className="text-white text-lg font-semibold">Buyer</span>
-            </div>
-            {/* Profile Card (shown when buyer name is clicked) */}
-            {showProfileCard && (
-                <div className="bg-white p-6 rounded-lg shadow-lg mb-6 flex items-center space-x-4 max-w-xs mt-1 py-1">
-                    <div>
-                        <h3 className="text-lg font-semibold text-green-800">Buyer Profile</h3>
+            <div className="flex items-end justify-end relative mb-2 mr-4">
+                <div
+                    className="flex items-center justify-center mt-2 py-1 w-16 h-16 bg-green-500 rounded-full cursor-pointer"
+                    onClick={toggleProfileCard}
+                >
+                    <span className="text-white text-lg font-semibold">Buyer</span>
+                </div>
+                {/* Profile Card (shown when buyer name is clicked) */}
+                {showProfileCard && (
+                    <div className="absolute top-20 right-0 bg-white p-4 rounded-lg shadow-lg z-10">
+                        <h3 className="text-lg font-semibold text-green-800 mb-2">Buyer Profile</h3>
                         <p className="text-green-700">Name: {buyerName}</p>
                         <p className="text-green-700">Location: Indore</p>
                         <p className="text-green-700">Email: rameshPatel@gmail.com</p>
                         <button
-                            className="mt-4 bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700 transition-colors"
+                            className="mt-4 bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700 transition-colors w-full"
                             onClick={toggleProfileCard}
                         >
                             Close Profile
                         </button>
                     </div>
-                </div>
-            )}
-            <p className="mb-8 text-lg font-medium text-green-800">
-                Showing {totalUser} {totalUser > 1 ? "Products" : "Product"}
-            </p>
-
-            <SearchInput defaultValue={searchQuery} />
-
-            <div className="mt-6">
-                <Link href="/cart" className="text-green-600 hover:underline">
-                    Go to Cart ({cart.length})
-                </Link>
-                {totalUser === 0 ? (
-                    <p className="mt-4 text-green-700">No result returned</p>
-                ) : (
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-6">
-                        {profileData.map(({ name, price, image, description }: iProduct) => (
-                            <ProductCard
-                                key={name}
-                                name={name}
-                                image={image}
-                                price={price}
-                                description={description}
-                                onAddToCart={addToCart}
-                            />
-                        ))}
-                    </div>
                 )}
             </div>
-        </section>
+
+            <section className="min-h-screen w-screen px-4 md:px-14 mt-0 bg-green-50 py-2">
+                <p className="mb-8 text-lg font-medium text-green-800">
+                    Showing {totalUser} {totalUser > 1 ? "Products" : "Product"}
+                </p>
+
+                <SearchInput defaultValue={searchQuery} />
+
+                <div className="mt-6">
+                    <Link href="/cart" className="text-green-600 hover:underline">
+                        Go to Cart ({cart.length})
+                    </Link>
+                    {totalUser === 0 ? (
+                        <p className="mt-4 text-green-700">No result returned</p>
+                    ) : (
+                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-6">
+                            {profileData.map(({ name, price, image, description }: iProduct) => (
+                                <ProductCard
+                                    key={name}
+                                    name={name}
+                                    image={image}
+                                    price={price}
+                                    description={description}
+                                    onAddToCart={addToCart}
+                                />
+                            ))}
+                        </div>
+                    )}
+                </div>
+            </section>
+        </div>
     );
 }

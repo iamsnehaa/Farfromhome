@@ -46,14 +46,17 @@ export default function FarmerCard() {
     const toggleProfileCard = () => setShowProfileCard(!showProfileCard);
     return (
         <div>
-            <div className="flex items-start mt-2 mb-2">
+            <div className="flex items-end justify-end relative mt-2 mb-2 mr-4">
                 <div
-                    className="flex items-center justify-center py-4 w-20 h-20 bg-green-500 rounded-full cursor-pointer ml-4"
+                    className="flex items-center justify-center w-16 h-16 bg-green-500 rounded-full cursor-pointer ml-4"
                     onClick={toggleProfileCard}
                 >
-                    <span className="text-white text-sm font-semibold">Contractor</span>
+                    <span className="text-white text-center text-sm font-semibold break-words px-2">
+                        Contract
+                    </span>
                 </div>
             </div>
+
 
             {/* Profile Card (shown when buyer name is clicked) */}
             {showProfileCard && (
