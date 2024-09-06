@@ -1,3 +1,4 @@
+'use client '
 
 
 import { Button } from "@/components/ui/button";
@@ -10,6 +11,7 @@ import React from "react";
 import { FaSeedling, FaTractor, FaLeaf, FaPhone, FaHome } from "react-icons/fa"; // Agriculture-related icons
 
 export default function SignupForm() {
+
     return (
         <div className="min-h-screen bg-green-50 flex flex-col items-center justify-center py-8 px-4 sm:px-6 lg:px-8">
             {/* Background and theme */}

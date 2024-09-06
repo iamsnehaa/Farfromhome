@@ -1,10 +1,48 @@
+import SellerProductCard from '@/components/sellerProductCard';
+import React from 'react';
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
 
-import Product from "../product/page";
+interface Product {
+    title: string;
+    image: string;
+    description: string;
+    price?: string;
+}
 
-export default function Buyer() {
+const products: Product[] = [
+    {
+        title: "Corn",
+        image: "/corn.jpg",
+        description: "Yellow corn kernels spilled out of a burlap bag with a cob of corn next to it",
+        price: "$499.99"
+    },
+    {
+        title: "Cotton",
+        image: "/cotton.jpg",
+        description: "Fluffy white cotton balls arranged in a basket with a cotton field in the background",
+        price: "$149.99"
+    },
+    // Add more products as needed
+];
+
+export default function Home() {
     return (
-        <div className="mt-0">
-            <Product />
+        <div className="container mx-auto p-4 bg-beige">
+            <header className="flex justify-between items-center py-4 border-b-2 border-green-700">
+                <Link href="/seller" className="text-2xl font-bold text-green-900 hover:border-b-2 hover:border-green-800 transition-all duration-300">
+                    Seller Product
+                </Link>
+            </header>
+
+            {/* Product Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-6">
+                {products.map((product, index) => (
+                    <SellerProductCard key={index} product={product} />
+                ))}
+            </div>
+
+            {/* Footer */}
             <footer className="bg-green-900 text-white py-8 mt-12">
                 <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
                     {/* About Us */}

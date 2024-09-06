@@ -37,7 +37,7 @@ export default function SellerCard() {
             <header className="bg-white shadow-md p-4 flex justify-between items-center">
                 <h1 className="text-xl font-bold text-green-800">Welcome, Seller!</h1>
                 <button 
-                    className="menu-button bg-green-500 rounded-full w-12 h-12 flex items-center justify-center hover:bg-green-600 transition-colors"
+                    className="menu-button bg-green-500 rounded-full w-16 h-16 flex items-center justify-center hover:bg-green-600 transition-colors"
                     
                     onClick={toggleMenu}
                 >
@@ -96,21 +96,15 @@ export default function SellerCard() {
                     <div className="space-y-4 space-x-4">
                         <button 
                             className="bg-green-500 text-white w-64 py-4 rounded-lg hover:bg-green-600 transition transform hover:scale-105"
-                            onClick={() => handleNavigation('/add-product')}
+                            onClick={() => handleNavigation('/addproduct')}
                         >
                             <i className="fas fa-plus-circle mr-2"></i>Add Product
                         </button>
                         <button 
                             className="bg-yellow-500 text-white w-64 py-4 rounded-lg hover:bg-yellow-600 transition transform hover:scale-105"
-                            onClick={() => handleNavigation('/update-product')}
+                            onClick={() => handleNavigation('/sellerProductPage')}
                         >
-                            <i className="fas fa-edit mr-2"></i>Update Product
-                        </button>
-                        <button 
-                            className="bg-red-500 text-white w-64 py-4 rounded-lg hover:bg-red-600 transition transform hover:scale-105"
-                            onClick={() => handleNavigation('/delete-product')}
-                        >
-                            <i className="fas fa-trash-alt mr-2"></i>Delete Product
+                            <i className="fas fa-edit mr-2"></i>View Your Product
                         </button>
                     </div>
                 </div>

@@ -23,7 +23,7 @@ export default function ProductCard(props: ProductCardProps) {
                 />
             </div>
             <h3 className="font-semibold text-lg mb-2 text-green-800">{name}</h3>
-            <p className="text-green-700 mb-2 font-medium">Price: ${price}</p>
+            <p className="text-green-700 mb-2 font-medium">Price: {price}</p>
             <p className="text-green-600 mb-4">{description}</p>
             <button
                 className="w-full bg-green-600 text-white py-2 rounded-md hover:bg-green-700 transition-colors"
