@@ -3,6 +3,7 @@
 import React, { useState } from 'react'
 import { Menu, X, ChevronDown, ChevronRight, ChevronUp } from 'lucide-react'
 import { useRouter } from 'next/navigation'
+import Image from 'next/image'
 
 const menuItems = [
   {
@@ -28,9 +29,7 @@ export default function Navbar() {
     setIsMenuOpen(!isMenuOpen)
   }
 
-  const toggleSignup = () => {
-    setIsSignupOpen(!isSignupOpen)
-  }
+ 
 
   const handleClick = () => {
     router.push('/')
@@ -41,7 +40,7 @@ export default function Navbar() {
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-2 sm:px-6 lg:px-8">
         <div className="inline-flex items-center space-x-2">
           <span className="font-bold text-white cursor-pointer" onClick={handleClick}>
-            Far From Home
+            <Image src="/BackgroundImage.png" alt="logo " width={100} height={100} className='rounded-lg' />
           </span>
         </div>
 
@@ -61,16 +60,11 @@ export default function Navbar() {
         </div>
 
         <div className="hidden lg:flex items-center space-x-4">
-          <button
-            onClick={toggleSignup}
-            className="bg-white text-green-700 px-4 py-2 rounded-md hover:bg-green-200 transition-colors"
+        <button
+            className="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-800 transition-colors"
+            onClick={() => router.push('/signup')}
           >
-            Sign Up
-            {isSignupOpen ? (
-              <ChevronUp className="ml-2 inline-block h-4 w-4" />
-            ) : (
-              <ChevronDown className="ml-2 inline-block h-4 w-4" />
-            )}
+            Singup
           </button>
 
           <button
@@ -126,11 +120,10 @@ export default function Navbar() {
                     Login
                   </button>
                   <button
-                    className="w-full bg-green-700 text-white py-2 rounded-md hover:bg-green-800 transition-colors"
-                    onClick={toggleSignup}
+                    className="w-full bg-green-600 text-white py-2 rounded-md hover:bg-green-800 transition-colors"
+                    onClick={() => router.push('/signup')}
                   >
-                    Sign Up
-                    {isSignupOpen ? <ChevronUp className="ml-2 h-4 w-4" /> : <ChevronDown className="ml-2 h-4 w-4" />}
+                    Sign up
                   </button>
                 </div>
               </div>

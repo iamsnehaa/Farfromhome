@@ -64,3 +64,4 @@ export interface iProduct {
 
 
 export const backgroundImage = "/BackgroundImage.png"
+export const logoImage = "/logo.png"

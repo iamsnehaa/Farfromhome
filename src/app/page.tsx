@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { data } from "@/lib/data/data";
+import { data, logoImage } from "@/lib/data/data";
 import { backgroundImage } from "@/lib/data/data";
 
 export default function Home() {
@@ -7,19 +7,18 @@ export default function Home() {
     <div className="bg-green-50 min-h-screen">
       {/* Hero Section */}
       <div className="flex justify-center items-center mt-0 py-8">
-  <div
-    className="relative bg-cover bg-center bg-no-repeat max-w-2xl w-full h-72 p-6 rounded-lg shadow-lg border border-earthy-brown"
-    style={{
-      backgroundImage: `url(${backgroundImage})`,
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
-    }}
-  >
-    {/* Brown overlay for agriculture theme */}
-    <div className="absolute inset-0 bg-earthy-brown opacity-40 rounded-lg"></div>
-  </div>
-</div>
- 
+        <div
+          className="relative bg-cover bg-center bg-no-repeat max-w-2xl w-full h-72 p-6 rounded-lg shadow-lg border border-earthy-brown"
+          style={{
+            backgroundImage: `url(${backgroundImage})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }}
+        >
+
+        </div>
+      </div>
+
       {/* Products Section */}
       <div className="py-14 bg-green-50">
         <div className="flex justify-center items-center">
