@@ -1,9 +1,8 @@
 'use client'
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { data, iProduct } from "@/lib/data/data";
-
 import ProductCard from "@/components/productCard";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import SearchInput from "@/components/searchInput";
 
@@ -14,6 +13,9 @@ export default function ProductPage() {
     const [buyerName, setBuyerName] = useState<string>("Ramesh patel"); // Example buyer name
     const searchParams = useSearchParams();
     const searchQuery = searchParams?.get("q");
+    const profileCardRef = useRef<HTMLDivElement>(null);
+    const buyerButtonRef = useRef<HTMLDivElement>(null);  // Add ref for the buyer button
+    const router = useRouter()
 
     // Load cart from localStorage on page load
     useEffect(() => {
@@ -52,13 +54,41 @@ export default function ProductPage() {
     const totalUser = profileData.length;
 
     // Toggle Profile Card
-    const toggleProfileCard = () => setShowProfileCard(!showProfileCard);
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (
+                profileCardRef.current &&
+                !profileCardRef.current.contains(event.target as Node) &&
+                !buyerButtonRef.current?.contains(event.target as Node) // Exclude the buyer button
+            ) {
+                setShowProfileCard(false);
+            }
+        };
+        if (showProfileCard) {
+            document.addEventListener('mousedown', handleClickOutside);
+        } else {
+            document.removeEventListener('mousedown', handleClickOutside);
+        }
+
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [showProfileCard]);
+
+    const toggleProfileCard = () => {
+        setShowProfileCard(!showProfileCard);
+    };
+
+    const handleNavigation = (path: string) => {
+        router.push(path);
+    };
 
     return (
         <div>
             {/* Buyer Info */}
             <div className="flex items-end justify-end relative mb-2 mr-4">
                 <div
+                    ref={buyerButtonRef}  // Attach ref to the button
                     className="flex items-center justify-center mt-2 py-1 w-16 h-16 bg-green-500 rounded-full cursor-pointer"
                     onClick={toggleProfileCard}
                 >
@@ -66,16 +96,19 @@ export default function ProductPage() {
                 </div>
                 {/* Profile Card (shown when buyer name is clicked) */}
                 {showProfileCard && (
-                    <div className="absolute top-20 right-0 bg-white p-4 rounded-lg shadow-lg z-10">
+                    <div
+                        ref={profileCardRef}
+                        className="absolute top-20 right-0 bg-white p-4 rounded-lg shadow-lg z-10"
+                    >
                         <h3 className="text-lg font-semibold text-green-800 mb-2">Buyer Profile</h3>
                         <p className="text-green-700">Name: {buyerName}</p>
                         <p className="text-green-700">Location: Indore</p>
                         <p className="text-green-700">Email: rameshPatel@gmail.com</p>
-                        <button
-                            className="mt-4 bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700 transition-colors w-full"
-                            onClick={toggleProfileCard}
+                        <button 
+                            className="block  py-2 text-gray-700 hover:bg-green-100 w-full text-left"
+                            onClick={() => handleNavigation('/logout')}
                         >
-                            Close Profile
+                            <i className="fas fa-sign-out-alt mr-2 text-green-400"></i>Logout
                         </button>
                     </div>
                 )}

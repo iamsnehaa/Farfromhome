@@ -1,8 +1,9 @@
 'use client'
 import { FarmersList } from "@/lib/data/farmersList";
-import { useState, useEffect, SetStateAction } from "react";
+import { useState, useEffect, SetStateAction, useRef } from "react";
 import Image from "next/image";
 import { Button } from "./ui/button";
+import { useRouter } from "next/navigation";
 
 
 export default function FarmerCard() {
@@ -14,7 +15,8 @@ export default function FarmerCard() {
     const [viewAll, setViewAll] = useState(false);
     const [showProfileCard, setShowProfileCard] = useState(false);
     const [buyerName, setBuyerName] = useState<string>("Shiv");
-
+    const profileCardRef = useRef<HTMLDivElement>(null);
+    const router = useRouter()
 
     const handleSearch = () => {
         if (selectedState || selectedDistrict) {
@@ -43,9 +45,39 @@ export default function FarmerCard() {
 
     const paginate = (pageNumber: SetStateAction<number>) => setCurrentPage(pageNumber);
 
-    const toggleProfileCard = () => setShowProfileCard(!showProfileCard);
+
+
+
+    const toggleProfileCard = () => {
+        setShowProfileCard(!showProfileCard);
+    };
+
+    // Close profile card when clicking outside of it
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            // TypeScript fix: Cast event.target to Node
+            if (profileCardRef.current && !profileCardRef.current.contains(event.target as Node)) {
+                setShowProfileCard(false);
+            }
+        };
+        if (showProfileCard) {
+            document.addEventListener('mousedown', handleClickOutside);
+        } else {
+            document.removeEventListener('mousedown', handleClickOutside);
+        }
+
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [showProfileCard]);
+
+    const handleNavigation = (path: string) => {
+        router.push(path);
+    };
+
     return (
         <div>
+            {/* Contractor Button */}
             <div className="flex items-end justify-end relative mt-2 mb-2 mr-4">
                 <div
                     className="flex items-center justify-center w-16 h-16 bg-green-500 rounded-full cursor-pointer ml-4"
@@ -55,25 +87,29 @@ export default function FarmerCard() {
                         Contract
                     </span>
                 </div>
-            </div>
 
-
-            {/* Profile Card (shown when buyer name is clicked) */}
-            {showProfileCard && (
-                <div className="bg-white p-4 rounded-lg shadow-lg ml-4 mt-2 max-w-xs">
-                    <h3 className="text-lg font-semibold text-green-800">Buyer Profile</h3>
-                    <p className="text-green-700">Name: {buyerName}</p>
-                    <p className="text-green-700">Location: Bhopal</p>
-                    <p className="text-green-700">Email: shiv@gmail.com</p>
-                    <button
-                        className="mt-4 bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700 transition-colors"
-                        onClick={toggleProfileCard}
+                {/* Contractor Profile Card, positioned next to the button */}
+                {showProfileCard && (
+                    <div
+                        ref={profileCardRef}
+                        className="absolute top-full right-0 mt-2 w-64 bg-white shadow-lg rounded-lg p-4 z-50"
                     >
-                        Close Profile
-                    </button>
-                </div>
-            )}
+                        <h3 className="text-lg font-bold text-green-800">Contractor Profile</h3>
+                        <div className="text-green-700 mt-4">
+                            <p className="font-semibold">Name:Ramesh Patel</p>
+                            <p>Location: Bhopal</p>
+                            <p>Email:ramesh@gmail.com</p>
 
+                        </div>
+                        <button
+                            className="block  py-2 text-gray-700 hover:bg-green-100 w-full text-left"
+                            onClick={() => handleNavigation('/logout')}
+                        >
+                            <i className="fas fa-sign-out-alt mr-2 text-green-400"></i>Logout
+                        </button>
+                    </div>
+                )}
+            </div>
             <div className="flex flex-col items-center px-4 sm:px-6 lg:px-8 bg-green-50 min-h-screen">
                 {/* Hero Image */}
                 <div className="relative h-[200px] sm:h-[300px] w-full py-3 mt-0">
