@@ -1,4 +1,4 @@
-import FarmerDetailsCard from "@/app/components/FarmerDetaillsCard";
+import FarmerDetailsCard from "@/components/FarmerDetaillsCard";
 
 
 export default function FarmerDetail()

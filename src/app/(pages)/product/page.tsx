@@ -1,15 +1,17 @@
-// ProductPage.tsx
 'use client'
 import { useState, useEffect } from "react";
 import { data, iProduct } from "@/lib/data/data";
-import SearchInput from "@/app/components/searchInput";
-import ProductCard from "@/app/components/productCard";
+
+import ProductCard from "@/components/productCard";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
+import SearchInput from "@/components/searchInput";
 
 export default function ProductPage() {
     const [profileData, setProfileData] = useState<iProduct[]>([]);
     const [cart, setCart] = useState<iProduct[]>([]);
+    const [showProfileCard, setShowProfileCard] = useState(false);
+    const [buyerName, setBuyerName] = useState<string>("John Doe"); // Example buyer name
     const searchParams = useSearchParams();
     const searchQuery = searchParams?.get("q");
 
@@ -49,37 +51,64 @@ export default function ProductPage() {
 
     const totalUser = profileData.length;
 
+    // Toggle Profile Card
+    const toggleProfileCard = () => setShowProfileCard(!showProfileCard);
+
     return (
-        <section className="min-h-screen w-screen px-4 md:px-14 mt-0 bg-gray-50">
-    <p className="mb-8 text-lg font-medium">
-        Showing {totalUser} {totalUser > 1 ? "Products" : "Product"}
-    </p>
-
-    <SearchInput defaultValue={searchQuery} />
-
-    <div className="mt-6">
-        <Link href="/cart" className="text-blue-600 hover:underline">
-            Go to Cart ({cart.length})
-        </Link>
-        {totalUser === 0 ? (
-            <p className="mt-4 text-gray-600">No result returned</p>
-        ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-6">
-                {profileData.map(({ name, price, image, description }: iProduct) => (
-                    <ProductCard
-                        key={name}
-                        name={name}
-                        image={image}
-                        price={price}
-                        description={description}
-                        onAddToCart={addToCart}
-                    />
-                ))}
+        <section className="min-h-screen w-screen px-4 md:px-14 mt-0 bg-green-50">
+            {/* Buyer Info */}
+            <div className="bg-green-100 p-4 mb-6 rounded-lg py-2">
+                <p className="text-lg font-medium text-green-700 mt-3">
+                    Buyer Name: 
+                    <span className="text-green-800 hover:underline cursor-pointer" onClick={toggleProfileCard}>
+                        {buyerName}
+                    </span>
+                </p>
             </div>
-        )}
-    </div>
-</section>
-    
 
+            {/* Profile Card (shown when buyer name is clicked) */}
+            {showProfileCard && (
+                <div className="bg-white p-6 rounded-lg shadow-lg mb-6">
+                    <h3 className="text-lg font-semibold text-green-800">Buyer Profile</h3>
+                    <p className="text-green-700">Name: {buyerName}</p>
+                    <p className="text-green-700">Location: Springfield</p>
+                    <p className="text-green-700">Email: john.doe@example.com</p>
+                    <button
+                        className="mt-4 bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700 transition-colors"
+                        onClick={toggleProfileCard}
+                    >
+                        Close Profile
+                    </button>
+                </div>
+            )}
+
+            <p className="mb-8 text-lg font-medium text-green-800">
+                Showing {totalUser} {totalUser > 1 ? "Products" : "Product"}
+            </p>
+
+            <SearchInput defaultValue={searchQuery} />
+
+            <div className="mt-6">
+                <Link href="/cart" className="text-green-600 hover:underline">
+                    Go to Cart ({cart.length})
+                </Link>
+                {totalUser === 0 ? (
+                    <p className="mt-4 text-green-700">No result returned</p>
+                ) : (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-6">
+                        {profileData.map(({ name, price, image, description }: iProduct) => (
+                            <ProductCard
+                                key={name}
+                                name={name}
+                                image={image}
+                                price={price}
+                                description={description}
+                                onAddToCart={addToCart}
+                            />
+                        ))}
+                    </div>
+                )}
+            </div>
+        </section>
     );
 }

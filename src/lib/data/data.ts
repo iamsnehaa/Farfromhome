@@ -61,4 +61,6 @@ export interface iProduct {
   
   // Push data into the array
   Products.forEach((product) => data.push(product));
-  
+
+
+export const backgroundImage = "/BackgroundImage.png"
